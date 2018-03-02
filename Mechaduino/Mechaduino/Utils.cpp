@@ -335,14 +335,17 @@ void calibrate() {   /// this is the calibration routine
 
 
 void serialCheck() {        //Monitors serial for commands.  Must be called in routinely in loop for serial interface to work.
+int input;
 
   if (SerialUSB.available()) {
-
-    char inChar = (char)SerialUSB.read();
+     input = SerialUSB.parseFloat();
+     SerialUSB.println(input);
+     
+     diskTurn(input);
+     
+    /*char inChar = (char)SerialUSB.read();
 
     switch (inChar) {
-
-
       case 'p':             //print
         print_angle();
         break;
@@ -431,7 +434,7 @@ void serialCheck() {        //Monitors serial for commands.  Must be called in r
 
       default:
         break;
-    }
+    }*/
   }
 
 }
@@ -1257,6 +1260,44 @@ void moveAbs(float pos_final,int vel_max, int accel){
   
 }
 
+//external encoder calibration
+
+const int interruptPin = 10;
+const int holesPerRevolution = 360;
+const int gearBoxRatio = 60;
+int motorDirection;
+int encoder_counter;
+
+void diskTurn(int deg){
+     encoder_counter = 0;
+     if(deg > 0){                       //keep track turning direction
+          motorDirection = 1;
+     }
+     else{
+          motorDirection = -1;
+     }
+     
+     attachInterrupt(digitalPinToInterrupt(interruptPin), encoderIncrement, RISING);      //start taking data from encoder
+     r = r + deg * gearBoxRatio;
+
+     delay(100);
+     while(abs(e)>1);                        //motor's control loop completed
+     detachInterrupt(interruptPin);
+     
+     r = r + ( (float)abs(deg) - counterToDeg() ) * motorDirection * gearBoxRatio;     //calibrate location using encoder
+     
+}
+
+void encoderIncrement(){
+     encoder_counter ++;      //counting number of holes moved
+     SerialUSB.print("counter: ");
+     SerialUSB.println(encoder_counter);
+}
+
+float counterToDeg(){
+     return encoder_counter*360.0/holesPerRevolution;
+     //return 10.0;
+}
 
 
 

@@ -52,7 +52,7 @@
 	
 	void parameterEditv();            //parameter editing menu
 	
-	void parameterEdito();            //parameter editing menu
+     void parameterEdito();            //parameter editing menu
 
   void hybridControl();             //open loop stepping, but corrects for missed steps.  under development
 
@@ -65,6 +65,14 @@
   void moveRel(float pos_final,int vel_max, int accel);     // Generates trapezoidal motion profile for closed loop position mode
   
   void moveAbs(float pos_final,int vel_max, int accel);     // Generates trapezoidal motion profile for closed loop position mode
+
+//addition code
+//external encoder calibration
+     void diskTurn(int deg);       //Control motor connect to disk, deg = degree turn for the disk
+
+     void encoderIncrement();      //ISR handle encoder interrupt
+
+     float counterToDeg();         //Calculate error
   
 #endif
 

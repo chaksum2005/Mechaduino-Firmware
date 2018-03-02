@@ -63,6 +63,8 @@ void setup()        // This code runs once at startup
   serialMenu();                     // Prints menu to serial monitor
   setupSPI();                       // Sets up SPI for communicating with encoder
   digitalWrite(ledPin,LOW);         // turn LED off 
+
+  pinMode(10, INPUT);               // encoder data pin
   
 
   // Uncomment the below lines as needed for your application.
@@ -70,8 +72,8 @@ void setup()        // This code runs once at startup
   
   //    configureStepDir();           // Configures setpoint to be controlled by step/dir interface
   //    configureEnablePin();         // Active low, for use wath RAMPS 1.4 or similar
-  //     enableTCInterrupts();         // uncomment this line to start in closed loop 
-  //    mode = 'x';                   // start in position mode
+      enableTCInterrupts();         // uncomment this line to start in closed loop 
+      mode = 'x';                   // start in position mode
 
 }
   
