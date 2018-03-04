@@ -1290,8 +1290,8 @@ void diskTurn(int deg){
 
 void encoderIncrement(){
      encoder_counter ++;      //counting number of holes moved
-     SerialUSB.print("counter: ");
-     SerialUSB.println(encoder_counter);
+     //SerialUSB.print("counter: ");
+     //SerialUSB.println(encoder_counter);
 }
 
 float counterToDeg(){
