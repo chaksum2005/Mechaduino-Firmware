@@ -60,7 +60,7 @@ void setup()        // This code runs once at startup
 
   SerialUSB.begin(115200);          
   delay(3000);                      // This delay seems to make it easier to establish a connection when the Mechaduino is configured to start in closed loop mode.  
-  serialMenu();                     // Prints menu to serial monitor
+  //serialMenu();                     // Prints menu to serial monitor
   setupSPI();                       // Sets up SPI for communicating with encoder
   digitalWrite(ledPin,LOW);         // turn LED off 
 
