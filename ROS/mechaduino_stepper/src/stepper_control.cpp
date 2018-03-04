@@ -45,8 +45,9 @@ void talk (serial::Serial *ser, int deg){
 
 	ser->write(os.str());
 	ser->flush();
-	ser->readline( result );
-	std::cout << result;
+	sleep(1);			//comment the following 3 line if don't want to wait 
+	ser->readline( result );	//
+	std::cout << result;		//
 	std::cout << "done\n";
 }
 
